@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup JDK
         uses: actions/setup-java@v3
@@ -24,10 +24,11 @@ jobs:
 
       - name: Build APK
         run: |
-          ./gradlew assembleRelease  # Nếu code Android Studio, dùng lệnh này
+          chmod +x gradlew
+          ./gradlew assembleRelease  
 
       - name: Upload APK
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: release-apk
           path: app/build/outputs/apk/release/*.apk
