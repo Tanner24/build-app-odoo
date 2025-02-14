@@ -22,13 +22,19 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
+      - name: Check Gradle Wrapper
+        run: ls -la
+        working-directory: android # Nếu project có thư mục con 'android'
+
       - name: Build APK
         run: |
+          cd android # Nếu project có thư mục con 'android'
           chmod +x gradlew
-          ./gradlew assembleRelease  
+          ./gradlew clean
+          ./gradlew assembleRelease --stacktrace
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: release-apk
-          path: app/build/outputs/apk/release/*.apk
+          path: android/app/build/outputs/apk/release/*.apk # Đảm bảo đường dẫn đúng
