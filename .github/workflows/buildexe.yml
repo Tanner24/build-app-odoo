@@ -20,8 +20,13 @@ jobs:
 
       - name: Install dependencies
         run: |
+          pip install --upgrade pip
           pip install pyinstaller
-          pip install -r requirements.txt || echo "No requirements.txt found"
+      - name: Debug Python & Pip
+        run: |
+          python --version
+          pip --version
+          pip list
 
       - name: Build EXE
         run: |
